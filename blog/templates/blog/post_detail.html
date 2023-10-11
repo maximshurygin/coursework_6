@@ -1,0 +1,14 @@
+{% extends "service/base.html" %}
+{% block content %}
+    {% if post %}
+        <h1>{{ post.title }}</h1>
+        <p>Дата публикации: {{ post.publication_date }}</p>
+        <p>Количество просмотров: {{ post.views_count }}</p>
+        {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width: 30%;">
+        {% endif %}
+        <p>{{ post.content }}</p>
+    {% else %}
+        <p>Публикация не найдена.</p>
+    {% endif %}
+{% endblock %}

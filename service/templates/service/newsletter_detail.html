@@ -1,0 +1,31 @@
+{% extends "service/base.html" %}
+{% load custom_filter %}
+
+{% block content %}
+    {% if newsletter %}
+        <h1>Тема: {{ newsletter.message.subject }}</h1>
+        <p>Сообщение: {{ newsletter.message.body }}</p>
+        <p>Время рассылки: {{ newsletter.start_time }} - {{ newsletter.end_time }}</p>
+        <p>Статус: {{ newsletter.get_status_display }}</p>
+        <p>Периодичность: {{ newsletter.get_periodicity_display }}</p>
+        <p>Количество получателей: {{ newsletter.recipients.count }}</p>
+        <p>Получатели:
+            {% for recipient in newsletter.recipients.all %}{{ recipient.full_name }}{% if not forloop.last %},
+            {% endif %}{% endfor %}</p>
+        {% if not user|has_group:"Managers" %}
+            <a href="{% url 'newsletter_edit' newsletter.id %}" class="btn btn-primary">Редактировать</a>
+            <a href="{% url 'newsletter_delete' newsletter.id %}" class="btn btn-danger">Удалить</a>
+        {% endif %}
+
+        {% if request.user.is_manager %}
+            <a href="{% url 'update_newsletter_status' newsletter.id %}" class="btn btn-primary">
+                {% if newsletter.is_active %}
+                    Деактивировать
+                {% else %}
+                    Активировать
+                {% endif %}</a>
+        {% endif %}
+    {% else %}
+        <p>Рассылка не найдена.</p>
+    {% endif %}
+{% endblock %}

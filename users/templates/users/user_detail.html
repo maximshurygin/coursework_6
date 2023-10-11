@@ -1,0 +1,15 @@
+{% extends "service/base.html" %}
+
+{% block content %}
+    {% if user %}
+        <h2>Email: {{ user.email }}</h2>
+        <a href="{% url 'users:user_toggle_active' user.id %}" class="btn btn-primary">
+            {% if user.is_active %}
+            Деактивировать
+        {% else %}
+            Активировать
+        {% endif %}</a>
+    {% else %}
+        <p>Пользователь не найден.</p>
+    {% endif %}
+{% endblock %}

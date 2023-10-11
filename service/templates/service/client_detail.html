@@ -1,0 +1,15 @@
+{% extends "service/base.html" %}
+
+{% block content %}
+    {% if client %}
+        <h1>{{ client.full_name }}</h1>
+        <p>Почта: {{ client.email }}</p>
+        <p>Комментарий: {{ client.comment }}</p>
+        {% if perms.service.change_client %}
+            <a href="{% url 'client_edit' client.id %}" class="btn btn-primary">Редактировать</a>
+            <a href="{% url 'client_delete' client.id %}" class="btn btn-danger">Удалить</a>
+        {% endif %}
+    {% else %}
+        <p>Клиент не найден.</p>
+    {% endif %}
+{% endblock %}

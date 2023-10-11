@@ -1,0 +1,29 @@
+{% extends 'service/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="welcome-title">Статистика сервиса</h1>
+
+                <div class="statistics">
+                    <p>Количество рассылок: <strong>{{ newsletters_count }}</strong></p>
+                    <p>Количество активных рассылок: <strong>{{ active_newsletters_count }}</strong></p>
+                    <p>Количество уникальных клиентов: <strong>{{ unique_clients_count }}</strong></p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <h2 class="blog-title">Блог</h2>
+                <div class="blog-posts">
+                    {% for post in random_posts %}
+                        <div class="blog-post">
+                            <h3><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h3>
+                            <p>{{ post.content|truncatewords:50 }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

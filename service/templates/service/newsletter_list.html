@@ -1,0 +1,34 @@
+{% extends 'service/base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row text-center">
+            {% for newsletter in newsletter_list %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <h4 class="my-0 font-weight-normal">
+                                <a href="{% url 'newsletter_detail' pk=newsletter.id %}">
+                                    Рассылка #{{ forloop.counter }}
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                Тема рассылки: {% if newsletter.message %} {{ newsletter.message.subject }} {% else %}
+                                Не задано {% endif %}
+                            </p>
+                            <p class="card-text">
+                                Количество получателей: {{ newsletter.recipients.count }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <p>Рассылки отсутствуют.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <nav class="ms-5">
+        <a class="p-2 btn btn-outline-primary" href="{% url 'home' %}">Главная</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'newsletter_list' %}">Рассылки</a>
+        {% if not user.is_manager %}
+            <a class="p-2 btn btn-outline-primary" href="{% url 'newsletter_add' %}">Создать рассылку</a>
+        {% endif %}
+        <a class="p-2 btn btn-outline-primary" href="{% url 'messages_list' %}">Сообщения</a>
+        {% if not user.is_manager %}
+            <a class="p-2 btn btn-outline-primary" href="{% url 'messages_add' %}">Создать сообщение</a>
+        {% endif %}
+        <a class="p-2 btn btn-outline-primary" href="{% url 'client_list' %}">Клиенты</a>
+        {% if not user.is_manager %}
+            <a class="p-2 btn btn-outline-primary" href="{% url 'client_add' %}">Создать клиента</a>
+        {% endif %}
+        {% if user.is_authenticated %}
+            {% if user.is_manager %}
+                <a class="p-2 btn btn-outline-primary" href="{% url 'users:user_list' %}">Пользователи</a>
+            {% endif %}
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:logout' %}">Выйти</a>
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:profile' %}">Профиль</a>
+        {% else %}
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Войти</a>
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:register' %}">Регистрация</a>
+        {% endif %}
+    </nav>
+</div>

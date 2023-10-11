@@ -1,0 +1,14 @@
+{% extends "service/base.html" %}
+
+{% block content %}
+    {% if message %}
+        <h2>Тема: {{ message.subject }}</h2>
+        <p>Текст сообщения: {{ message.body }}</p>
+        {% if perms.service.change_client %}
+            <a href="{% url 'messages_edit' message.id %}" class="btn btn-primary">Редактировать</a>
+            <a href="{% url 'messages_delete' message.id %}" class="btn btn-danger">Удалить</a>
+        {% endif %}
+    {% else %}
+        <p>Сообщение не найдено.</p>
+    {% endif %}
+{% endblock %}
