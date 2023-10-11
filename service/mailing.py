@@ -10,11 +10,11 @@ def should_send(newsletter):
         return True
 
     delta = timezone.now() - newsletter.last_sent_at
-    if newsletter.frequency == 'daily' and delta.days >= 1:
+    if newsletter.periodicity == 'daily' and delta.days >= 1:
         return True
-    elif newsletter.frequency == 'weekly' and delta.days >= 7:
+    elif newsletter.periodicity == 'weekly' and delta.days >= 7:
         return True
-    elif newsletter.frequency == 'monthly' and delta.days >= 30:
+    elif newsletter.periodicity == 'monthly' and delta.days >= 30:
         return True
 
     return False
@@ -40,9 +40,9 @@ def send_scheduled_emails():
                 recipient_list,
                 fail_silently=False,
             )
-            Log.objects.create(newsletter=newsletter, status=True)
+            Log.objects.create(newsletter=newsletter, status=True, owner=newsletter.owner)
 
             newsletter.last_sent_at = timezone.now()
             newsletter.save()
         except Exception as err:
-            Log.objects.create(newsletter=newsletter, status=False, server_response=str(err))
+            Log.objects.create(newsletter=newsletter, status=False, server_response=str(err), owner=newsletter.owner)

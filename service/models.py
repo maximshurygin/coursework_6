@@ -82,9 +82,6 @@ class Log(models.Model):
         status = 'Успешно' if self.status else 'Неуспешно'
         return f"Лог рассылки для {self.newsletter} - {status}"
 
-    def get_queryset(self):
-        return super().get_queryset().filter(newsletter__owner=self.request.user)
-
     class Meta:
         verbose_name = 'Лог'
         verbose_name_plural = 'Логи'
