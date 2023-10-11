@@ -46,4 +46,3 @@ def send_scheduled_emails():
             newsletter.save()
         except Exception as err:
             Log.objects.create(newsletter=newsletter, status=False, server_response=str(err))
-            continue
