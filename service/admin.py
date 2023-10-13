@@ -13,7 +13,8 @@ class ClientAdmin(admin.ModelAdmin):
 
 @admin.register(Newsletter)
 class NewsletterAdmin(admin.ModelAdmin):
-    list_display = ('message', 'recipients_list', 'start_time', 'end_time', 'periodicity', 'status',)
+    list_display = ('message', 'recipients_list', 'start_time',
+                    'end_time', 'periodicity', 'status',)
     list_filter = ('status',)
 
     def recipients_list(self, obj):

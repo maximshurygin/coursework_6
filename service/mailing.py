@@ -22,7 +22,9 @@ def should_send(newsletter):
 
 def send_scheduled_emails():
     current_time = timezone.now().time()
-    newsletters = Newsletter.objects.filter(start_time__lte=current_time, end_time__gte=current_time, status='running')
+    newsletters = Newsletter.objects.filter(start_time__lte=current_time,
+                                            end_time__gte=current_time,
+                                            status='running')
 
     for newsletter in newsletters:
         if not should_send(newsletter):
@@ -30,7 +32,8 @@ def send_scheduled_emails():
 
         subject = newsletter.message.subject
         body = newsletter.message.body
-        recipient_list = [client.email for client in newsletter.recipients.all()]
+        recipient_list = [client.email for client in
+                          newsletter.recipients.all()]
 
         try:
             send_mail(
@@ -40,9 +43,12 @@ def send_scheduled_emails():
                 recipient_list,
                 fail_silently=False,
             )
-            Log.objects.create(newsletter=newsletter, status=True, owner=newsletter.owner)
+            Log.objects.create(newsletter=newsletter, status=True,
+                               owner=newsletter.owner)
 
             newsletter.last_sent_at = timezone.now()
             newsletter.save()
         except Exception as err:
-            Log.objects.create(newsletter=newsletter, status=False, server_response=str(err), owner=newsletter.owner)
+            Log.objects.create(newsletter=newsletter, status=False,
+                               server_response=str(err),
+                               owner=newsletter.owner)

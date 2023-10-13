@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('service', '0005_rename_newsletter_settings_dispatchlog_newsletter'),
     ]
@@ -14,6 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='dispatchlog',
             name='newsletter',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='service.newsletter', verbose_name='Рассылка'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='service.newsletter',
+                                    verbose_name='Рассылка'),
         ),
     ]

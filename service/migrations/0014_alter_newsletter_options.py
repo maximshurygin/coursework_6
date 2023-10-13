@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('service', '0013_newsletter_is_active_alter_newsletter_status'),
     ]
@@ -12,6 +11,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='newsletter',
-            options={'permissions': [('can_toggle_active', 'Can toggle active status')], 'verbose_name': 'Рассылка', 'verbose_name_plural': 'Рассылки'},
+            options={'permissions': [('can_toggle_active', 'Can toggle active status')], 'verbose_name': 'Рассылка',
+                     'verbose_name_plural': 'Рассылки'},
         ),
     ]

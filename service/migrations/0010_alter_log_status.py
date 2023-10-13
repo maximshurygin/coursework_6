@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('service', '0009_remove_newsletter_send_time_newsletter_end_time_and_more'),
     ]

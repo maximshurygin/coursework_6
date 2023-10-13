@@ -21,9 +21,12 @@ class NewsletterForm(forms.ModelForm):
         user = kwargs.pop('user', None)
         super(NewsletterForm, self).__init__(*args, **kwargs)
         if user is not None:
-            self.fields['recipients'].queryset = Client.objects.filter(owner=user)
-            self.fields['message'].queryset = Message.objects.filter(owner=user)
+            self.fields['recipients'].queryset = Client.objects. \
+                filter(owner=user)
+            self.fields['message'].queryset = Message.objects. \
+                filter(owner=user)
 
     class Meta:
         model = Newsletter
-        fields = ('recipients', 'message', 'start_time', 'end_time', 'periodicity', 'status',)
+        fields = ('recipients', 'message', 'start_time',
+                  'end_time', 'periodicity', 'status',)

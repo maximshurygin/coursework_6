@@ -1,7 +1,8 @@
 import random
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, \
+    LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render, get_object_or_404
@@ -9,7 +10,8 @@ from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import CreateView, UpdateView, ListView, DetailView
 
-from users.forms import UserRegisterForm, UserProfileForm, RecoveryForm, VerifyCodeForm
+from users.forms import UserRegisterForm, UserProfileForm, RecoveryForm, \
+    VerifyCodeForm
 from users.models import User
 
 
@@ -38,7 +40,8 @@ def generate_new_password(request):
             email = form.cleaned_data['email']
             try:
                 user = User.objects.get(email=email)
-                new_password = ''.join([str(random.randint(0, 9)) for _ in range(12)])
+                new_password = ''.join([str(random.randint(0, 9))
+                                        for _ in range(12)])
                 send_mail(
                     subject='Вы сменили пароль',
                     message=f'Ваш новый пароль: {new_password}',
@@ -90,7 +93,8 @@ def send_verification_code(request):
     return redirect('users:profile')
 
 
-class ToggleUserActiveStatusView(LoginRequiredMixin, PermissionRequiredMixin, View):
+class ToggleUserActiveStatusView(LoginRequiredMixin, PermissionRequiredMixin,
+                                 View):
     permission_required = 'users.can_toggle_active'
 
     def get(self, request, *args, **kwargs):

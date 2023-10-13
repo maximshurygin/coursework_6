@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('service', '0015_newsletter_last_sent_at_alter_newsletter_periodicity'),
     ]
@@ -13,6 +12,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='newsletter',
             name='periodicity',
-            field=models.CharField(choices=[('daily', 'Раз в день'), ('weekly', 'Раз в неделю'), ('monthly', 'Раз в месяц')], max_length=10, verbose_name='Периодичность'),
+            field=models.CharField(
+                choices=[('daily', 'Раз в день'), ('weekly', 'Раз в неделю'), ('monthly', 'Раз в месяц')],
+                max_length=10, verbose_name='Периодичность'),
         ),
     ]

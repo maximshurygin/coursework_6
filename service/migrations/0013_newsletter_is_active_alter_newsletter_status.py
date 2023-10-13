@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('service', '0012_alter_newsletter_status'),
     ]
@@ -18,6 +17,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='newsletter',
             name='status',
-            field=models.CharField(choices=[('created', 'Создана'), ('running', 'Запущена'), ('completed', 'Завершена')], max_length=20, verbose_name='Статус рассылки'),
+            field=models.CharField(
+                choices=[('created', 'Создана'), ('running', 'Запущена'), ('completed', 'Завершена')], max_length=20,
+                verbose_name='Статус рассылки'),
         ),
     ]

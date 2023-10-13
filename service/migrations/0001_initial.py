@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -42,8 +41,12 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('send_time', models.TimeField(verbose_name='Время рассылки')),
-                ('periodicity', models.CharField(choices=[('daily', 'Раз в день'), ('weekly', 'Раз в неделю'), ('monthly', 'Раз в месяц')], max_length=10, verbose_name='Периодичность')),
-                ('status', models.CharField(choices=[('created', 'Создана'), ('running', 'Запущена'), ('completed', 'Завершена')], max_length=10, verbose_name='Статус рассылки')),
+                ('periodicity', models.CharField(
+                    choices=[('daily', 'Раз в день'), ('weekly', 'Раз в неделю'), ('monthly', 'Раз в месяц')],
+                    max_length=10, verbose_name='Периодичность')),
+                ('status',
+                 models.CharField(choices=[('created', 'Создана'), ('running', 'Запущена'), ('completed', 'Завершена')],
+                                  max_length=10, verbose_name='Статус рассылки')),
             ],
             options={
                 'verbose_name': 'Настройка',
@@ -54,10 +57,13 @@ class Migration(migrations.Migration):
             name='DispatchLog',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('attempt_datetime', models.DateTimeField(auto_now_add=True, verbose_name='Дата и время последней попытки')),
+                ('attempt_datetime',
+                 models.DateTimeField(auto_now_add=True, verbose_name='Дата и время последней попытки')),
                 ('is_successful', models.BooleanField(default=True, verbose_name='Успешная попытка')),
                 ('server_response', models.TextField(blank=True, null=True, verbose_name='Ответ почтового сервера')),
-                ('newsletter_settings', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='service.newslettersettings', verbose_name='Настройки рассылки')),
+                ('newsletter_settings',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='service.newslettersettings',
+                                   verbose_name='Настройки рассылки')),
             ],
             options={
                 'verbose_name': 'Лог',
